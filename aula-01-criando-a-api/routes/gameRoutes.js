@@ -7,4 +7,7 @@ const gameRoutes = express.Router();
 // Endpoint para listar todos os games
 gameRoutes.get('/games', gameController.getAllGames);
 
+// Endpoint para cadastrar um game
+gameRoutes.post('/games', gameController.createGame);
+
 export default gameRoutes;

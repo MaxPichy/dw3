@@ -15,6 +15,24 @@ class gameService{
             console.log(error);
         }
     }
+
+    // Médoto para cadastrar um game
+    async Create(title, platform, year, price){
+        try{
+            const newGame = new Game({
+                // Desestruturação (titled: title)
+                title,
+                platform,
+                year,
+                price
+            })
+            // Gravando no banco
+            await newGame.save() // .save() -> método do mongoose para cadastrar no bd
+            
+        } catch(error){
+            console.log(error);
+        }
+    }
 }
 // Exportando a classe
 export default new gameService();
