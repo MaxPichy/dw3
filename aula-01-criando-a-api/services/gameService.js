@@ -27,8 +27,33 @@ class gameService{
                 price
             })
             // Gravando no banco
-            await newGame.save() // .save() -> método do mongoose para cadastrar no bd
-            
+            await newGame.save(); // .save() -> método do mongoose para cadastrar no bd
+        } catch(error){
+            console.log(error);
+        }
+    }
+
+    // Método para excluir um game
+    async Delete(id){
+        try{
+            // Excluindo o jogo pela id
+            await Game.findByIdAndDelete(id);
+            console.log(`Game com a id ${id} foi deletado.`);
+        } catch(error){
+            console.log(error);
+        }
+    }
+
+    // Método para alterar um game
+    async Update(id, title, platform, year, price){
+        try{
+            await Game.findByIdAndUpdate(id, {
+                title,
+                platform, 
+                year,
+                price
+            });
+            console.log(`Game com a id ${id} foi alterado.`);
         } catch(error){
             console.log(error);
         }

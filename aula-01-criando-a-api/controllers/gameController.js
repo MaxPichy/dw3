@@ -1,5 +1,7 @@
 // Importando o Service
 import gameService from "../services/gameService.js";
+// Importando o ObjectId
+import {ObjectId} from 'mongodb';
 
 // Função para tratar a requisição de LISTAR os jogos
 const getAllGames = async(req, res) => {
@@ -20,7 +22,7 @@ const createGame = async(req, res) => {
         const{title, platform, year, price} = req.body; // coletando os dados do corpo da requisição
         await gameService.Create(title, platform, year, price);
 
-        res.sendStatus(201).json({'message': 'O jogo foi cadastrado com sucesso!'});
+        res.sendStatus(201).json({message: 'O jogo foi cadastrado com sucesso!'});
         // 201 = created.
         
     } catch(error){
@@ -29,4 +31,44 @@ const createGame = async(req, res) => {
     }
 }
 
-export default {getAllGames, createGame};
+// Função para DELETAR um jogo
+const deleteGame = async(req, res) => {
+    try{
+        // Coletando a id
+        const id = req.params.id;
+
+        // Validação do id
+        if (ObjectId.isValid(id)){
+            await gameService.Delete(id);
+            // Cod.204 (NO CONTENT)
+            res.status(204).json({message: 'O jogo foi excluído com sucesso!'});
+        } else{
+            res.status(400).json({error: 'Ocorreu um erro na validação da id.'});
+        }
+
+    } catch(error){
+        console.log(error);
+        res.status(500).json({error: 'Erro interno do servidor. Não foi possível deletar o jogo.'})
+    }
+}
+
+const updateGame = async (req, res) => {
+    try{
+        const id = req.params.id;
+
+        if(ObjectId.isValid(id)){
+            const {title, platform, year, price} = req.body;
+            await gameService.Update(id, title, platform, year, price);
+            // Cod. 200 OK
+            res.status(200).json({message: 'Jogo atualizado com sucesso!'});
+        } else{
+            res.status(400).json({error: 'Ocorreu um erro na validação da id.'});
+        }
+
+    } catch(error){
+        console.log(error);
+        res.status(500).json({error: 'Erro interno do servidor. Não foi possível atualizar o jogo.'})
+    }
+}
+
+export default {getAllGames, createGame, deleteGame, updateGame};
