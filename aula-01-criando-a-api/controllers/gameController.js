@@ -52,23 +52,46 @@ const deleteGame = async(req, res) => {
     }
 }
 
+// Função para ALTERAR um jogo
 const updateGame = async (req, res) => {
     try{
         const id = req.params.id;
 
         if(ObjectId.isValid(id)){
             const {title, platform, year, price} = req.body;
-            await gameService.Update(id, title, platform, year, price);
+            const game = await gameService.Update(id, title, platform, year, price);
             // Cod. 200 OK
-            res.status(200).json({message: 'Jogo atualizado com sucesso!'});
+            res.status(200).json({message: 'Jogo atualizado com sucesso!', game: game});
         } else{
             res.status(400).json({error: 'Ocorreu um erro na validação da id.'});
         }
 
     } catch(error){
         console.log(error);
-        res.status(500).json({error: 'Erro interno do servidor. Não foi possível atualizar o jogo.'})
+        res.status(500).json({error: 'Erro interno do servidor. Não foi possível atualizar o jogo.'});
     }
 }
 
-export default {getAllGames, createGame, deleteGame, updateGame};
+// Função para BUSCAR um jogo ÚNICO
+const getOneGame = async (req, res) => {
+    try{
+        const id = req.params.id;
+        
+        if(ObjectId.isValid(id)){
+            const game = await gameService.getOne(id);
+            res.status(200).json({game});
+        } else{
+            res.status(400).json({error: 'A id informada é inválida.'});
+        }
+
+        // Verificando se o jogo foi encontrado
+        if(!game){
+            res.status(404).json({error: 'O jogo buscado não foi encontrado.'});
+        }
+    } catch(error){
+        console.log(error);
+        res.status(500).json({error: 'Erro interno do servidor. Não foi possível listar o jogo.'});
+    }
+}
+
+export default {getAllGames, createGame, deleteGame, updateGame, getOneGame};
