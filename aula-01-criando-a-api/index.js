@@ -8,12 +8,12 @@ import Game from './models/Games.js';
 import gameRoutes from './routes/gameRoutes.js';
 
 // Configurações do Express
-app.use(express.json()) // Permite o uso de .json para aplicação
+app.use(express.json()); // Permite o uso de .json para aplicação
 // Ativando a utilização das rotas
 app.use('/', gameRoutes);
 
 // Iniciando a conexão com o banco de dados MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/api-the-games')
+mongoose.connect('mongodb://127.0.0.1:27017/api-the-games');
 
 // app.get('/', (req, res) => {
 //     const games = [
