@@ -4,4 +4,6 @@ import userController from '../controllers/userController.js';
 
 userRoutes.post('/users', userController.createUser);
 
+userRoutes.post('/auth', userController.loginUser)
+
 export default userRoutes;
