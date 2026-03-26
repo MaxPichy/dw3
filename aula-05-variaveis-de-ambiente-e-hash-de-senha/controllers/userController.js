@@ -1,6 +1,7 @@
 import userService from '../services/userService.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 
 // Configurando o dotenv
 dotenv.config();
@@ -12,7 +13,12 @@ const JWTSecret = process.env.JWTSecret;
 const createUser = async(req, res) => {
     try{
         const {name, email, password} = req.body;
-        await userService.Create(name, email, password);
+
+        // Gerando o hash de senha
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+
+        await userService.Create(name, email, hash);
         res.status(201).json({message: 'Usuário cadastrado com sucesso.'});
     } catch(error){
         console.log(error);
@@ -32,8 +38,11 @@ const loginUser = async(req, res) => {
 
             // Se o usuário for encontrado
             if(user != undefined){
-                // Verificando se a senha está correta
-                if(user.password == password){
+                // Verificando o hash de senha
+                const correct = bcrypt.compareSync(password, user.password);
+
+                // Verificando se o hash foi validado
+                if(correct){
                     // CRIAR O TOKEN
                     jwt.sign({id: user._id, email: user.email}, JWTSecret, {expiresIn: '48h'}, (error, token) => {
                             // Falha

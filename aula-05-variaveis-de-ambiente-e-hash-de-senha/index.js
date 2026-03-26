@@ -1,17 +1,22 @@
 import express from 'express';
 const app = express();
-// Importando o mongoose
+
 import mongoose from 'mongoose';
+import cors from 'cors';
+
 // Importando os models
 import Games from './models/Games.js';
 import User from './models/Users.js';
-
 // Importando as rotas
 import gameRoutes from './routes/gameRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 // Configurações do Express
 app.use(express.json()); // Permite o uso de .json para aplicação
+
+// Configurando o CORS
+app.use(cors());
+
 // Ativando a utilização das rotas
 app.use('/', gameRoutes);
 app.use('/', userRoutes);
