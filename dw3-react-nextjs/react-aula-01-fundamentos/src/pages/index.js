@@ -15,6 +15,12 @@ export default function Home() {
       <Descricao cidade = "Registro" idade = {20} />
 
       <Cat nome = "Salém" raca = "Bombaim" idade = "2" humano = "Max" />
+      <Dog nome = "Rex" raca = "Labrador" idade = "3" />
+
+      {/* Hook useState */}
+      <Contador/>
+      
+      <Form />
     </>
   );
 }
