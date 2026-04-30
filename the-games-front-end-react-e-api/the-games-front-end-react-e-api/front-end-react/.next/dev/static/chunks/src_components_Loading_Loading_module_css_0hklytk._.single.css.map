@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/Loading/Loading.module.css"],"sourcesContent":[".loading {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n    width: 100%;\r\n    height: 100%;\r\n    min-height: 50vh;\r\n    color: var(--secondary-color);\r\n    font-family: \"Poppins\";\r\n    font-size: 1rem;\r\n  }\r\n  \r\n  .loading img {\r\n    width: 3.5rem;\r\n  }\r\n  \r\n  .done {\r\n    display: none;\r\n  }"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;AAaE;;;;AAIA"}}]
+}

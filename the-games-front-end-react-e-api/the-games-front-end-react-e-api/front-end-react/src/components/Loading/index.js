@@ -1,9 +1,9 @@
 import styles from "@/components/Loading/Loading.module.css";
 
-const Loading = () => {
+const Loading = ({loading}) => { // Receberá o estado de loading através de props
   return (
     <>
-      <div className={styles.loading}>
+      <div className={loading ? styles.loading : styles.none}>
         <img src="../../images/loading.gif" alt="Carregando" />
         <p>Carregando...</p>
       </div>
