@@ -400,6 +400,18 @@ const HomeContent = ()=>{
     const [games, setGames] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])([]); // Estado inicial: array vazio
     // Criando um estado para controlar o carregamento
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(true);
+    const deleteGame = async (gameId)=>{
+        try {
+            const response = await __TURBOPACK__imported__module__$5b$externals$5d2f$axios__$5b$external$5d$__$28$axios$2c$__esm_import$2c$__$5b$project$5d2f$node_modules$2f$axios$29$__["default"].delete(`http://localhost:4000/games/${gameId}`);
+            if (response.status === 204) {
+                alert('O jogo foi excluído com sucesso!');
+                // Atualizando o estado e removendo o jogo excluído
+                setGames(games.filter((game)=>game._id != gameId));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     // Hook use effect -> efeito colateral do componente
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
         // Função para buscar os jogos na API
@@ -429,19 +441,19 @@ const HomeContent = ()=>{
                             children: "Lista de jogos"
                         }, void 0, false, {
                             fileName: "[project]/src/components/HomeContent/index.js",
-                            lineNumber: 44,
+                            lineNumber: 58,
                             columnNumber: 13
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/components/HomeContent/index.js",
-                        lineNumber: 43,
+                        lineNumber: 57,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0)),
                     loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Loading$2f$index$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                         loading: loading
                     }, void 0, false, {
                         fileName: "[project]/src/components/HomeContent/index.js",
-                        lineNumber: 47,
+                        lineNumber: 61,
                         columnNumber: 24
                     }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$HomeContent$2f$HomeContent$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].games,
@@ -456,12 +468,12 @@ const HomeContent = ()=>{
                                             alt: "Jogo em estoque"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/HomeContent/index.js",
-                                            lineNumber: 57,
+                                            lineNumber: 71,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HomeContent/index.js",
-                                        lineNumber: 56,
+                                        lineNumber: 70,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -471,7 +483,7 @@ const HomeContent = ()=>{
                                                 children: game.title
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 61,
+                                                lineNumber: 75,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -481,7 +493,7 @@ const HomeContent = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 62,
+                                                lineNumber: 76,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -491,7 +503,7 @@ const HomeContent = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 63,
+                                                lineNumber: 77,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -501,7 +513,7 @@ const HomeContent = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 64,
+                                                lineNumber: 78,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -511,7 +523,7 @@ const HomeContent = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 65,
+                                                lineNumber: 79,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -524,35 +536,50 @@ const HomeContent = ()=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                                lineNumber: 66,
+                                                lineNumber: 80,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
+                                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$HomeContent$2f$HomeContent$2e$module$2e$css__$5b$ssr$5d$__$28$css__module$29$__["default"].btnDel,
+                                                    onClick: ()=>deleteGame(game._id),
+                                                    children: "Deletar"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/HomeContent/index.js",
+                                                    lineNumber: 85,
+                                                    columnNumber: 21
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/HomeContent/index.js",
+                                                lineNumber: 84,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/HomeContent/index.js",
-                                        lineNumber: 60,
+                                        lineNumber: 74,
                                         columnNumber: 17
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, game._id, true, {
                                 fileName: "[project]/src/components/HomeContent/index.js",
-                                lineNumber: 55,
+                                lineNumber: 69,
                                 columnNumber: 15
                             }, ("TURBOPACK compile-time value", void 0)))
                     }, void 0, false, {
                         fileName: "[project]/src/components/HomeContent/index.js",
-                        lineNumber: 51,
+                        lineNumber: 65,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/HomeContent/index.js",
-                lineNumber: 41,
+                lineNumber: 55,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/src/components/HomeContent/index.js",
-            lineNumber: 39,
+            lineNumber: 53,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false);

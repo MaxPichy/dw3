@@ -11,6 +11,21 @@ const HomeContent = () => {
   // Criando um estado para controlar o carregamento
   const [loading, setLoading] = useState(true);
 
+  const deleteGame = async(gameId) => {
+    try{
+      const response = await axios.delete(`http://localhost:4000/games/${gameId}`);
+
+      if(response.status === 204){
+        alert('O jogo foi excluído com sucesso!');
+
+        // Atualizando o estado e removendo o jogo excluído
+        setGames(games.filter((game) => game._id != gameId));
+      }
+    } catch(error){
+      console.log(error);
+    }
+  }
+
   // Hook use effect -> efeito colateral do componente
   useEffect(() => {
     // Função para buscar os jogos na API
@@ -29,10 +44,9 @@ const HomeContent = () => {
         setTimeout(() => setLoading(false), 3000);
       }
     }
-
     fetchGames();
 
-  }, []) // Dependência do use effect
+  }, []); // Dependência do use effect
 
   return (
     <>
@@ -67,6 +81,13 @@ const HomeContent = () => {
                     style: 'currency',
                     currency: 'BRL'
                   })}</li>
+                  <li>
+                    <button
+                      className={styles.btnDel}
+                      onClick={() => deleteGame(game._id)}>
+                        Deletar
+                    </button>
+                  </li>
                 </div>
               </ul>
             ))}
